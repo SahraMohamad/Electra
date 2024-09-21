@@ -32,6 +32,6 @@ class Agent:
             model=self.model_name,
             stream=False
         )
-        npc_reply = response.choices[0].message.content
-        self.context.append({"role": "assistant", "content": npc_reply})
-        return npc_reply
+        llm_reply = response.choices[0].message.content
+        self.context.append({"role": "assistant", "content": llm_reply})
+        return llm_reply
