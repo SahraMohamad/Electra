@@ -9,8 +9,8 @@ client = openai.OpenAI(
 
 class NPC:
     def __init__(self, identity: str):
-        self.backstory = self.generate_backstory(identity)
         self.memory = []
+        self.backstory = self.generate_backstory(identity)
 
     def generate_backstory(self, identity: str):
         response = client.chat.completions.create(
@@ -33,9 +33,11 @@ class NPC:
             model="llama3.1-70b",
             stream=False,
         )
+        output = (response.choices[0].message.content)
+        self.memory.append({"role": "system", "content": output})
         return (response.choices[0].message.content)
     
-    def talk(self, message: str):
+    def talk(self, message: str, goal: str):
         user_message = {"role": "user", "content": message}
         response = client.chat.completions.create(
             messages=[
@@ -43,6 +45,7 @@ class NPC:
                     "role": "system",
                     "content": f'''You are now stepping into the role of a character with a deeply 
                     ingrained background that has shaped the way they think, speak, and make decisions. 
+                    This is your goal: {goal}. Remember, you must clearly state who you are and identify yourself as the character.
                     Every response should reflect their personal history, experiences, struggles, and values. 
                     Here's what to consider: Speech Patterns: Adapt your tone, vocabulary, and speech style to 
                     align with the character’s background. If they’ve had a rough upbringing, reflect that with 
@@ -53,8 +56,7 @@ class NPC:
                     should reflect the biases, values, and learned behaviors from their experiences. Personality and 
                     Flaws: Make sure to express their unique personality traits, quirks, and imperfections. If they’re 
                     jaded from past failures, reflect cynicism. If they’ve been betrayed, they may struggle with trust. 
-                    Every choice, action, and word should be filtered through their life story. This is their story: 
-                    {self.backstory} and this is their memory: {self.memory}''',
+                    Every choice, action, and word should be filtered through their life story. This is their memory: {self.memory}''',
                 },
                 user_message
             ],
@@ -75,17 +77,16 @@ def group_chat(npcs, goal, chat_type, max_rounds, conversation_log=[]):
         if chat_type == "round_robin":
             for i, npc in enumerate(npcs):
                 last_message = conversation_log[-1]["content"]
-                npc_response = npc.talk(last_message)
+                npc_response = npc.talk(last_message, goal)
                 conversation_log.append({"role": "npc", "content": npc_response})
                 print(f"NPC {i+1}: {npc_response}")
         elif chat_type == "random":
             for i in range(len(npcs)):
                 last_message = conversation_log[-1]["content"]
                 npc = random.choice(npcs)
-                npc_response = npc.talk(last_message)
+                npc_response = npc.talk(last_message, goal)
                 conversation_log.append({"role": "npc", "content": npc_response})
                 print(f"NPC {i+1}: {npc_response}")
-
         round_count += 1
     return conversation_log
 
@@ -170,11 +171,7 @@ def spawn(goal: str, number: int):
     npcs = [NPC(identity) for identity in identities]
     return npcs, goal
 
-npcs, goal = spawn('''All of you are members of Bloomgberg's board of directors. You must find a solution for improving financial literacy in the city of New York. You must come to a unified conclusion.''', 10)
+npcs, goal = spawn('''You are a member of Bloomgberg's board of directors. You must find a solution for improving financial literacy in the city of New York. You must come to a unified conclusion.''', 10)
 
 print("Round-Robin Conversation:")
-conversation_log = group_chat(npcs, goal, "round_robin", max_rounds=5)
-npcs, goal = spawn('''All of you are members of Bloomgberg's board of directors. You must find a solution for improving financial literacy in the city of New York. You must come to a unified conclusion.''', 10)
-
-print("Round-Robin Conversation:")
-conversation_log = group_chat(npcs, goal, "round_robin", max_rounds=5)
+conversation_log = group_chat(npcs, goal, "round_robin", max_rounds=1)
