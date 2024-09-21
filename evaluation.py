@@ -49,7 +49,9 @@ def judge(input:str):
     return (completion.choices[0].message.content) 
 
 
-idea = gpt("You are a member of Bloomgberg's board of directors. You must find a solution for improving financial literacy in the city of New York. You must come to a unified conclusion.")
-print(idea)
-judgement = judge(idea)
-print(judgement)
+solution = gpt("You are a member of Bloomgberg's board of directors. You must find a solution for improving financial literacy in the city of New York. You must come to a unified conclusion.")
+print(solution)
+scores = judge(solution)
+print(scores)
+
+
