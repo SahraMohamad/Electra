@@ -2,6 +2,7 @@ from Agent import Agent
 import random 
 import openai
 import os
+from generate_identity import generate_identities
 
 class Network:
     def __init__(self, task : str):
@@ -14,9 +15,8 @@ class Network:
         )
         self.agents = self._init_agents()
         
-    def _create_identities():
-        identities = []
-        
+    def _create_identities(state:str, num_voters:int):
+        identities = generate_identities(state, num_voters)
         return identities
         
     def _init_agents(self):
