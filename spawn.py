@@ -1,68 +1,67 @@
 import random
+import openai
+from openai import OpenAI
+
+client = openai.OpenAI(
+    base_url="https://api.cerebras.ai/v1",
+    api_key=""
+)
 
 class NPC:
     def __init__(self, identity: str):
-        api_keys=[
-            os.environ.get("THOMAS_API_KEY") if os.environ.get("THOMAS_API_KEY") else "",
-            os.environ.get("JET_API_KEY") if os.environ.get("JET_API_KEY") else ""
-        ]
-        self.cerebras_handler = CerebrasHandler("llama3.1-70b", api_keys=api_keys)
         self.backstory = self.generate_backstory(identity)
-        self.system_prompt = self.get_system_prompt()
         self.memory = []
 
-    def _get_system_prompt():
-        system_prompt = {
-                "role": "system",
-                "content": f'''You are now stepping into the role of a character with a deeply 
-                ingrained background that has shaped the way they think, speak, and make decisions. 
-                Every response should reflect their personal history, experiences, struggles, and values. 
-                Here's what to consider: Speech Patterns: Adapt your tone, vocabulary, and speech style to 
-                align with the character’s background. If they’ve had a rough upbringing, reflect that with 
-                a blunt, no-nonsense style. If they’re well-educated or from a privileged class, weave in 
-                sophistication and insight. Thought Process: Respond as if you are truly living through this 
-                character's worldview. Their past—whether filled with hardship, privilege, trauma, or success 
-                should influence how they approach problems, what they fear, and what drives them. Every thought 
-                should reflect the biases, values, and learned behaviors from their experiences. Personality and 
-                Flaws: Make sure to express their unique personality traits, quirks, and imperfections. If they’re 
-                jaded from past failures, reflect cynicism. If they’ve been betrayed, they may struggle with trust. 
-                Every choice, action, and word should be filtered through their life story. This is their story: 
-                {self.backstory} and this is their memory: {self.memory}''',
-            }
-
-    return system_prompt
-
     def generate_backstory(self, identity: str):
-        messages=[
-            {
-                "role": "system",
-                "content": '''Develop a deeply realistic, human-like backstory that equally explores both 
-                the strengths and flaws of the character. Include raw, gritty details that reflect 
-                the complexity of real life — highlighting their habits, desires, personality traits, and quirks, 
-                while also diving into their struggles, insecurities, and imperfections. Focus on 
-                the challenges they've faced, the consequences of their actions, and the darker 
-                aspects of their life experiences. The backstory should feel fully fleshed out 
-                and grounded in hard-hitting realism, based on the provided characteristics. Don't shy away from adult themes.''',
-            },
-            {
-                "role": "user",
-                "content": identity,
-            }
-        ]
-
-        response = self.cerebras_handler.call_api(messages=messages)
-        return response['choices'][0]['message']['content']
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": '''Develop a deeply realistic, human-like backstory that equally explores both 
+                    the strengths and flaws of the character. Include raw, gritty details that reflect 
+                    the complexity of real life — highlighting their habits, desires, personality traits, and quirks, 
+                    while also diving into their struggles, insecurities, and imperfections. Focus on 
+                    the challenges they've faced, the consequences of their actions, and the darker 
+                    aspects of their life experiences. The backstory should feel fully fleshed out 
+                    and grounded in hard-hitting realism, based on the provided characteristics. Don't shy away from adult themes.''',
+                },
+                {
+                    "role": "user",
+                    "content": identity,
+                }
+            ],
+            model="llama3.1-70b",
+            stream=False,
+        )
+        return (response.choices[0].message.content)
     
     def talk(self, message: str):
         user_message = {"role": "user", "content": message}
-        messages=[
-            self.system_prompt,
-            user_message
-        ],
-
-        response = self.cerebras_handler.call_api(messages=messages)
-
-        npc_reply = response['choices'][0]['message']['content']
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": f'''You are now stepping into the role of a character with a deeply 
+                    ingrained background that has shaped the way they think, speak, and make decisions. 
+                    Every response should reflect their personal history, experiences, struggles, and values. 
+                    Here's what to consider: Speech Patterns: Adapt your tone, vocabulary, and speech style to 
+                    align with the character’s background. If they’ve had a rough upbringing, reflect that with 
+                    a blunt, no-nonsense style. If they’re well-educated or from a privileged class, weave in 
+                    sophistication and insight. Thought Process: Respond as if you are truly living through this 
+                    character's worldview. Their past—whether filled with hardship, privilege, trauma, or success 
+                    should influence how they approach problems, what they fear, and what drives them. Every thought 
+                    should reflect the biases, values, and learned behaviors from their experiences. Personality and 
+                    Flaws: Make sure to express their unique personality traits, quirks, and imperfections. If they’re 
+                    jaded from past failures, reflect cynicism. If they’ve been betrayed, they may struggle with trust. 
+                    Every choice, action, and word should be filtered through their life story. This is their story: 
+                    {self.backstory} and this is their memory: {self.memory}''',
+                },
+                user_message
+            ],
+            model="llama3.1-70b",
+            stream=False,
+        )
+        npc_reply = response.choices[0].message.content
         self.memory.append({"role": "assistant", "content": npc_reply})
         return npc_reply
 
@@ -171,6 +170,10 @@ def spawn(goal: str, number: int):
     npcs = [NPC(identity) for identity in identities]
     return npcs, goal
 
+npcs, goal = spawn('''All of you are members of Bloomgberg's board of directors. You must find a solution for improving financial literacy in the city of New York. You must come to a unified conclusion.''', 10)
+
+print("Round-Robin Conversation:")
+conversation_log = group_chat(npcs, goal, "round_robin", max_rounds=5)
 npcs, goal = spawn('''All of you are members of Bloomgberg's board of directors. You must find a solution for improving financial literacy in the city of New York. You must come to a unified conclusion.''', 10)
 
 print("Round-Robin Conversation:")
