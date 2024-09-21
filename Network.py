@@ -25,12 +25,12 @@ class Network:
                 for i, agent in enumerate(self.agents):
                     agent_response = agent.talk()
                     self.shared_context.append({"role": "assistant", "content": agent_response})
-                    print(f"NPC {i+1}: {agent_response}")
+                    print(f"Agent {i+1}: {agent_response}")
             elif chat_type == "random":
                 for i in range(len(self.agents)):
                     agent = random.choice(self.agents)
                     agent_response = agent.talk()
                     self.shared_context.append({"role": "npc", "content": agent_response})
-                    print(f"NPC {i+1}: {agent_response}")
+                    print(f"Agent {i+1}: {agent_response}")
             round_count += 1
         return self.shared_context    
