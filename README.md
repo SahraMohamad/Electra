@@ -24,6 +24,10 @@ Our aim is to provide a powerful, user-friendly platform that captures the diver
 
 ## **Technologies used**
 
+### LLM's
+- Cerebras: For high inference speed, crucial for generating and visualizing insights in real-time and at scale. Paramount for agentic frameworks.
+- Llama 3.1 - 7b & 80b: Amazing LLM models in general, great for fine-tuning and open-source tooling
+
 ### Front-End
 - CSS: For styling
 - HTML: For markup
@@ -36,8 +40,6 @@ Our aim is to provide a powerful, user-friendly platform that captures the diver
 
 ### Data Formats and Libraries
 - GeoJSON: For geographic data representation
-- Cerebras: For advanced language model processing
-- LLMs: For sentiment analysis and natural language processing
 
 ## **Setup Instructions**
 
