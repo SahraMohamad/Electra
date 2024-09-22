@@ -11,7 +11,7 @@ breaking_news = '''Breaking News! Donald Trump will launch his own cryptocurrenc
 agent_network = Network(breaking_news, state = "Pennsylvania", num_agents = 15)
 agent_network.simulate("round_robin", num_rounds = 1)
 ```
-
+## **Electra**
 Electra is an interactive web app that simulates and visualizes the effect of any hypothetical scenario on election results.  for political candidates as the 2024 elections approach. Leveraging advanced language models and dynamic data visualization, the tool enables users to select a state, input specific scenarios, and explore sentiment trends across counties.
 With an intuitive interactive map, users can easily comprehend public opinion and monitor shifts in sentiment over time.
 
