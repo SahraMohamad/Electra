@@ -1,4 +1,4 @@
-# **Electoral LLM - Predict Elections Better With LLM Agents**
+# **Electoral LLM - Predict Elections Way Better With LLM Agents**
 
 __TLDR: We built a multi-agent framework from scratch and used it to simulate election results in battleground states__ 
 
