@@ -5,7 +5,7 @@ class Agent:
         self.prompt = prompt
         self.identity = identity
         self.client = client
-        self.model_name = "llama3.1-8b"
+        self.model_name = "llama3.1-70b"
         self.backstory = self._create_backstory()
         
     def _create_backstory(self):
@@ -39,7 +39,7 @@ class Agent:
                 },
                 {
                     "role": "user",
-                    "content": "You look down at your phone and see the news: " + self.prompt + f". Share your thoughts and only react to {conversation_context}."
+                    "content": f"You look down at your phone and see the news: {self.prompt}. Share your thoughts and only react to {conversation_context}."
                 }],
             model=self.model_name,
             stream=False
@@ -47,3 +47,32 @@ class Agent:
         agent_reply = response.choices[0].message.content
         return agent_reply
     
+    def pre_predict(self):
+        if "Kamala" in self.identity:
+            return 0
+        else:
+            return 1
+
+    def post_predict(self):
+        response = self.client.chat.completions.create(
+        messages=[{
+                "role": "system",
+                "content": f'''You are an imaginary voter with {self.identity}. This is your backstory: {self.backstory}.
+                Every response should reflect the voter's identity, personal history, experiences, struggles, and values. 
+                Here's what to consider: Speech Patterns: Adapt your tone, vocabulary, and speech style to 
+                align with the voter's background. Thought Process: Respond as if you are truly living through the 
+                voter's worldview in first-person. Personality and Flaws: Make sure to express their unique personality traits, quirks, 
+                and imperfections.'''
+            },
+            {
+                "role": "user",
+                "content": f'''You look down at your phone and see the news: {self.prompt}. You can only say one thing: the name of the candidate you're voting for?'''
+            }],
+            model=self.model_name,
+            stream=False,
+        )
+        agent_reply = response.choices[0].message.content
+        if "Kamala" in agent_reply:
+            return 0
+        else:
+            return 1
