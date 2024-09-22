@@ -1,4 +1,4 @@
-# **Electoral LLM - Live Voter Polls w/ Intelligent Agents**
+# **Electoral LLM - Live Voter Polls w/ LLM Agents**
 
 We built a multi-agent conversational & simulation framework from scratch. Leaner than CrewAI and Autogen, with just 4 lines of code, you can beat Chain-of-Thought prompting by relying on intelligent agents to do all the work for you. 
 
