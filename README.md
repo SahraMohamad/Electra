@@ -1,6 +1,17 @@
 # **Electoral LLM - Empowering Voter Insights with Intelligent Agents.**
 
-We built a multi-agent conversational & simulation framework from scratch. Electoral LLM  is an interactive web application designed to visualize real-time public sentiment for political candidates as the 2024 elections approach. Leveraging advanced language models and dynamic data visualization, the tool enables users to select a state, input specific scenarios, and explore sentiment trends across counties.
+We built a multi-agent conversational & simulation framework from scratch. With just 4 lines of code, you can beat Chain-of-Thought prompting by relying on intelligent agents to do all the work for you. 
+
+In Electoral-LLM, we'll be simulating real-time changes in political party popularity based on specific current events. Using our framework, we can mass generate hordes of human-like llms with complete backstories and indentities. 
+
+```python
+from Network import Network
+breaking_news = '''Breaking News! Donald Trump will launch his own cryptocurrency.'''
+agent_network = Network(breaking_news, "Pennsylvania", 15)
+agent_network.simulate("round_robin", 1)
+```
+
+Electoral LLM  is an interactive web application designed to visualize real-time public sentiment for political candidates as the 2024 elections approach. Leveraging advanced language models and dynamic data visualization, the tool enables users to select a state, input specific scenarios, and explore sentiment trends across counties.
 With an intuitive interactive map, users can easily comprehend public opinion and monitor shifts in sentiment over time.
 
 Our aim is to provide a powerful, user-friendly platform that captures the diverse perspectives of communities nationwide, facilitating informed discussions around the upcoming elections.
