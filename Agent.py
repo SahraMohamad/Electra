@@ -1,38 +1,50 @@
 from openai import OpenAI
 
 class Agent:
-    def __init__(self, prompt : str, identity: str, client : OpenAI):
-        self.identity = identity
+    def __init__(self, prompt : str, identity: str, client: OpenAI):
         self.prompt = prompt
-        self.system_prompt = self._create_system_prompt()
-        self.model_name = "llama3.1-70b"
+        self.identity = identity
         self.client = client
-        self.context = self._init_context()
+        self.model_name = "llama3.1-8b"
+        self.backstory = self._create_backstory()
+        self.conversation_context = []
         
-    def _create_system_prompt(self):
-        sys_prompt = {
-            "role": "system",
-            "content": f'''
-            This is your identity: ###{self.identity}###, 
-            And you have just been told this news: ###{self.prompt}###
-            
-            You should now begin to think about how this news will affect your voting disposition,
-            and you should openly discuss if hearing the news has or has not changed your opinion on who you will vote for
-            out of these two candidates: [Donald Trump, Kamala Harris]
-            '''
-        }
-        
-        return sys_prompt
-        
-    def _init_context(self):
-        return [self.system_prompt]
-        
-    def talk(self):
+    def _create_backstory(self):
         response = self.client.chat.completions.create(
-            messages=self.context,
+            messages = [{
+            "role": "system",
+            "content": '''Develop a deeply realistic, human-like backstory that equally explores both 
+                    the strengths and flaws of this character. Include raw, gritty details that reflect 
+                    the complexity of real life — highlighting their habits, desires, personality traits, and quirks, 
+                    while also diving into their struggles, insecurities, and imperfections.'''},
+            {
+                "role": "user",
+                "content": self.identity
+            }],
+            model=self.model_name,
+            stream=False
+        )
+        backstory = response.choices[0].message.content
+        return backstory
+        
+    def chat(self):
+        response = self.client.chat.completions.create(
+            messages=[{
+                    "role": "system",
+                    "content": f'''You are an imaginary voter: {self.identity}. This is your backstory: {self.backstory}.
+                    Every response should reflect their identity, personal history, experiences, struggles, and values. 
+                    Here's what to consider: Speech Patterns: Adapt your tone, vocabulary, and speech style to 
+                    align with the character’s background. Thought Process: Respond as if you are truly living through this 
+                    character's worldview. Personality and Flaws: Make sure to express their unique personality traits, quirks, 
+                    and imperfections. This is the group conversation: {self.conversation_context}'''
+                },
+                {
+                    "role": "user",
+                    "content": self.prompt
+                }],
             model=self.model_name,
             stream=False
         )
         agent_reply = response.choices[0].message.content
-        self.context.append({"role": "assistant", "content": agent_reply})
+        self.conversation_context.append(self.identity + ": " + agent_reply)
         return agent_reply
