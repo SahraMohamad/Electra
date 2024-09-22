@@ -39,17 +39,6 @@ Electra is an interactive web app that simulates and visualizes the effect of an
 ### Data Formats and Libraries
 - GeoJSON: For geographic data representation
 
-## **Setup Instructions**
 
-### **Prerequisites**
-- Python (version X.X)
-- Node.js (if applicable for the front-end)
-
-### **Installation Steps**
-1. Clone the repository:
-   ```bash git clone
-       https://github.com/SahraMohamad/LLM-Net.git
-       cd LLM-Net 
-2. Install dependencies
 
 
