@@ -1,6 +1,8 @@
 # **Electoral LLM - Predict Elections Better With LLM Agents**
 
-__We built a multi-agent conversation & simulation framework from scratch.__ Leaner than CrewAI & meaner than Autogen, we can beat prompting & fine-tuning by relying on intelligent agents to collaborate and do all the work for you __(in just 4 lines of code)__.
+__TLDR: We built a multi-agent framework from scratch and used it to simulate election results in battleground states__ 
+
+Leaner than CrewAI & meaner than Autogen, we can beat prompting & fine-tuning by relying on intelligent agents to collaborate and do all the work for you __(in just 4 lines of code)__.
 
 In Electoral-LLM, we adapted this framework to simulate how current events can affect voter popularity in real-time by mass-generating hordes of human-like llms with hyperspecific backstories and indentities. 
 
