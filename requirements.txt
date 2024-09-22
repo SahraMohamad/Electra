@@ -1,0 +1,5 @@
+requests
+openai
+flask
+flask-cors
+pandas
