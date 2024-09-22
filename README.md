@@ -19,9 +19,9 @@ Our aim is to provide a powerful, user-friendly platform that captures the diver
 
 
 ## **Features**
-- Interactive U.S. Map: Provides real-time visualization of sentiment data for political candidates across all U.S. counties.
-- Advanced Sentiment Analysis: Leverages language models to deliver nuanced insights into public sentiment dynamics.
-- Custom Scenario Inputs: Enables users to input different scenarios and observe their effects on public opinion toward candidates.
+- Custom Scenario: See how voters shift positions on hypothetical scenarios based on personal beliefs and group discussions
+- Interactive U.S. Map: Real-time visualizations of sample data
+- Representativeness: Samples are generalizable to the population using scraped US Census Data
 
 ## **Technologies Used**
 
