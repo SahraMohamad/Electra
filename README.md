@@ -12,11 +12,7 @@ agent_network = Network(breaking_news, state = "Pennsylvania", num_agents = 15)
 agent_network.simulate("round_robin", num_rounds = 1)
 ```
 ## **Electra**
-Electra is an interactive web app that simulates and visualizes the effect of any hypothetical scenario on election results.  for political candidates as the 2024 elections approach. Leveraging advanced language models and dynamic data visualization, the tool enables users to select a state, input specific scenarios, and explore sentiment trends across counties.
-With an intuitive interactive map, users can easily comprehend public opinion and monitor shifts in sentiment over time.
-
-Our aim is to provide a powerful, user-friendly platform that captures the diverse perspectives of communities nationwide, facilitating informed discussions around the upcoming elections.
-
+Electra is an interactive web app that simulates and visualizes the effect of any hypothetical scenario on election results. Users can enter an event (like "Donald Trump turns 78"), select a state to simulate in (like Arizona), and easily explore changes in voting trends state-wide. Simultaneously, users are able to see communication logs between AI agents, making our results both highly explainable and accurate. Our aim is to provide a powerful, user-friendly platform that captures the diverse political perspectives of communities nationwide, facilitating informed discussions around the upcoming elections.
 
 ## **Features**
 - Custom Scenario: See how voters shift positions on the craziest of hypothetical scenarios (e.g., "Breaking News! Bernie Sanders endorsed Trump")
