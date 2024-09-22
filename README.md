@@ -41,7 +41,7 @@ Electra is an interactive web app that simulates and visualizes the effect of an
 
 
 ## Team Information
-- Jet Wu, 
+- Jet Wu, jetw@andrew.cmu.edu
 - Thomas Bahmandeji, thomas.bahmandeji@du.edu
 - Sahra Mohamad, sahra.mohamad05@gmail.com
 - Dhruvi Kadhiwala, kadhiwala.dhruvi@gmail.com
