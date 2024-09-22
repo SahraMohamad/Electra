@@ -5,21 +5,23 @@ With an intuitive interactive map, users can easily comprehend public opinion an
 
 
 ## **Features**
+- Interactive U.S. Map: Provides real-time visualization of sentiment data for political candidates across all U.S. counties.
+- Advanced Sentiment Analysis: Leverages language models to deliver nuanced insights into public sentiment dynamics.
+- Custom Scenario Inputs: Enables users to input different scenarios and observe their effects on public opinion toward candidates.
 
+## **Technologies used**
 
-# **Technologies used**
-
-## Front-End
-- React: For building the user interface
-- D3.js: For dynamic data visualizations
+### Front-End
 - CSS: For styling
 - HTML: For markup
+- React: For building the user interface
+- D3.js: For dynamic data visualizations
 
-## Back-End
+### Back-End
 - Node.js: For server-side logic
 - Python: For data processing and integration
 
-## Data Formats and Libraries
+### Data Formats and Libraries
 - GeoJSON: For geographic data representation
 - Cerebras: For advanced language model processing
 - LLMs: For sentiment analysis and natural language processing
