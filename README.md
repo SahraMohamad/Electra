@@ -19,7 +19,7 @@ Our aim is to provide a powerful, user-friendly platform that captures the diver
 
 
 ## **Features**
-- Custom Scenario: See how voters shift positions on the craziest of hypothetical scenarios (e.g., Bernie Sanders endorsed Trump)
+- Custom Scenario: See how voters shift positions on the craziest of hypothetical scenarios (e.g., "Breaking News! Bernie Sanders endorsed Trump")
 - Interactive U.S. Map: Real-time visualizations of sample data
 - Representativeness: Samples are generalizable to the population using scraped US Census Data
 
