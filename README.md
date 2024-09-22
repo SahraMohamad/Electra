@@ -27,6 +27,18 @@ With an intuitive interactive map, users can easily comprehend public opinion an
 - LLMs: For sentiment analysis and natural language processing
 
 ## **Setup Instructions**
+
+### **Prerequisites**
+- Python (version X.X)
+- Node.js (if applicable for the front-end)
+
+### **Installation Steps**
+1. Clone the repository:
+   ```bash git clone
+       https://github.com/SahraMohamad/LLM-Net.git
+       cd LLM-Net 
+2. Install dependencies
+3. 
 ### **Prerequisites**
 
 
