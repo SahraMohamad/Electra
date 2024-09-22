@@ -7,8 +7,8 @@ In Electoral-LLM, we'll be using this framework to simulate how current events c
 ```python
 from Network import Network
 breaking_news = '''Breaking News! Donald Trump will launch his own cryptocurrency.'''
-agent_network = Network(breaking_news, "Pennsylvania", 15)
-agent_network.simulate("round_robin", 1)
+agent_network = Network(breaking_news, state = "Pennsylvania", num_agents = 15)
+agent_network.simulate("round_robin", num_rounds = 1)
 ```
 
 Electoral LLM  is an interactive web application designed to visualize real-time public sentiment for political candidates as the 2024 elections approach. Leveraging advanced language models and dynamic data visualization, the tool enables users to select a state, input specific scenarios, and explore sentiment trends across counties.
