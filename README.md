@@ -2,7 +2,7 @@
 
 We built a multi-agent conversational & simulation framework from scratch. Leaner than CrewAI and Autogen, with just 4 lines of code, you can beat Chain-of-Thought prompting by relying on intelligent agents to do all the work for you. 
 
-In Electoral-LLM, we'll be using this framework to simulate how current events can affect voter popularity in real-time by mass-generating hordes of human-like llms with hyperspecific backstories and indentities. 
+In Electoral-LLM, we adapted this framework to simulate how current events can affect voter popularity in real-time by mass-generating hordes of human-like llms with hyperspecific backstories and indentities. 
 
 ```python
 from Network import Network
