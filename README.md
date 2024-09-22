@@ -28,7 +28,7 @@ Our aim is to provide a powerful, user-friendly platform that captures the diver
 ### AI/ML
 - Cerebras: Crucial for any agentic framework, but especially for simulation research
 - Llama 3.1 (7B and 80B): Amazing LLM models in general, especially for fine-tuning and open-source tooling
-- GPT-4o-mini: Perfect for generating and extracting structured data
+- Pydantic + GPT-4o-mini: Perfect for generating and extracting structured data
 
 ### Front-End
 - CSS: For styling
