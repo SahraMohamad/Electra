@@ -1,4 +1,4 @@
-# ** Electoral LLM - Empowering Voter Insights with Intelligent Agents.**
+# **Electoral LLM - Empowering Voter Insights with Intelligent Agents.**
 
 Electoral LLM  is an interactive web application designed to visualize real-time public sentiment for political candidates as the 2024 elections approach. Leveraging advanced language models and dynamic data visualization, the tool enables users to select a state, input specific scenarios, and explore sentiment trends across counties.
 With an intuitive interactive map, users can easily comprehend public opinion and monitor shifts in sentiment over time.
